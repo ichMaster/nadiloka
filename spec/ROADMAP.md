@@ -65,7 +65,7 @@ Add the bounded grid and the Tejas scalar field driven from the "update Tejas" p
 **Implementation plan** (issue details in [roadmap/implementation/v0.2-issues.md](roadmap/implementation/v0.2-issues.md)):
 
 - [x] NADI-005 — Grid and neighbourhood helpers (S; after NADI-002)
-- [ ] NADI-006 — Tejas scalar field + `Patch` model (M; after NADI-005)
+- [x] NADI-006 — Tejas scalar field + `Patch` model (M; after NADI-005)
 - [ ] NADI-007 — Patch lifecycle in the update-Tejas phase (M; after NADI-006, NADI-003)
 - [ ] NADI-008 — Field-energy counter and energy-band test (S; after NADI-007)
 

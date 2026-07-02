@@ -29,6 +29,12 @@ class WorldConfig:
     seed: int
     width: int = 40
     height: int = 25
+    # Tejas patch parameters (NADI-006): the light the world runs on.
+    food_max: float = 10.0
+    patch_target: int = 6
+    patch_radius: int = 4
+    patch_intensity: float = 5.0
+    patch_lifetime: int = 30
 
 
 class World:
