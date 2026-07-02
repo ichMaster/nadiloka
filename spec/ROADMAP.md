@@ -44,7 +44,7 @@ Stand up the project skeleton and the `nadiloka/` engine package, the `World` co
 - [x] NADI-001 — Project skeleton & tooling (S)
 - [x] NADI-002 — `World` container: config, seeded RNG, tick counter, population (S; after NADI-001)
 - [x] NADI-003 — `Meru.step`: the five-phase hook order (S; after NADI-002)
-- [ ] NADI-004 — Demo runner + counters scaffold (S; after NADI-003)
+- [x] NADI-004 — Demo runner + counters scaffold (S; after NADI-003)
 
 ### v0.2 — Space and the Tejas field
 
