@@ -12,7 +12,15 @@ from nadiloka.world import World
 
 
 def counter_line(world: World) -> str:
-    """Format one structured counter log line for the world's current tick."""
+    """Format one structured counter log line for the world's current tick.
+
+    The v0 set: tick, population (0 until v1), total Tejas field
+    energy, and the live-patch count.
+    """
     population = len(world.population)
-    energy = 0.0  # total Tejas field energy; wired in v0.2
-    return f"tick={world.tick} population={population} energy={energy:.1f}"
+    energy = world.tejas.total_energy()
+    patches = len(world.patches)
+    return (
+        f"tick={world.tick} population={population} "
+        f"energy={energy:.1f} patches={patches}"
+    )

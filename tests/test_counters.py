@@ -6,14 +6,19 @@ from nadiloka.world import World, WorldConfig
 
 def test_counter_line_format():
     world = World(WorldConfig(seed=5))
-    assert counter_line(world) == "tick=0 population=0 energy=0.0"
+    assert counter_line(world) == "tick=0 population=0 energy=0.0 patches=0"
 
 
-def test_counter_line_tracks_the_tick():
+def test_counter_line_tracks_tick_energy_and_patches():
     world = World(WorldConfig(seed=5))
     world.step()
     world.step()
-    assert counter_line(world) == "tick=2 population=0 energy=0.0"
+    line = counter_line(world)
+    assert line.startswith("tick=2 population=0 energy=")
+    assert line.endswith(f"patches={world.config.patch_target}")
+    energy = float(line.split("energy=")[1].split()[0])
+    assert energy == round(world.tejas.total_energy(), 1)
+    assert energy > 0.0
 
 
 def test_counter_emission_is_read_only():

@@ -36,6 +36,11 @@ class WorldConfig:
     patch_radius: int = 4
     patch_intensity: float = 5.0
     patch_lifetime: int = 30
+    # The energy band (NADI-008): the "no runaway, no collapse" guard the
+    # band test and the v0.3 smoke run assert against, over band_ticks.
+    energy_band_low: float = 150.0
+    energy_band_high: float = 1500.0
+    band_ticks: int = 300
 
 
 class World:
