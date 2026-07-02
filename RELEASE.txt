@@ -1,0 +1,19 @@
+Nadiloka -- Release Notes
+=========================
+
+Version 0.1.0 (2026-07-02)
+---------------------------
+- Phase v0.1 (Skeleton and the Meru tick): an empty world ticks
+  deterministically. NADI-001 through NADI-004.
+- Project skeleton: the nadiloka/ engine package, demos/, tests/;
+  ruff + pytest tooling; dependencies exactly pysm + pyyaml (NADI-001).
+- World container: WorldConfig with an explicit seed, one World-owned
+  seeded random.Random (module-level random.* forbidden and pinned by
+  test), a tick counter, and the empty population dict (NADI-002).
+- Meru tick: World.step() calls the five phase hooks in fixed order
+  (update Tejas, rebuild grid, act, flush Nadi, death/cleanup); the
+  order is pinned by a recording-spy test (NADI-003).
+- Observability: demos/empty.py runner (--ticks, required --seed) and
+  the read-only counters scaffold (tick, population, energy); the
+  determinism harness asserts byte-identical counter logs for two
+  same-seed runs, in-process and through the CLI (NADI-004).
