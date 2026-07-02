@@ -42,7 +42,7 @@ Stand up the project skeleton and the `nadiloka/` engine package, the `World` co
 **Implementation plan** (issue details in [roadmap/implementation/v0.1-issues.md](roadmap/implementation/v0.1-issues.md)):
 
 - [x] NADI-001 — Project skeleton & tooling (S)
-- [ ] NADI-002 — `World` container: config, seeded RNG, tick counter, population (S; after NADI-001)
+- [x] NADI-002 — `World` container: config, seeded RNG, tick counter, population (S; after NADI-001)
 - [ ] NADI-003 — `Meru.step`: the five-phase hook order (S; after NADI-002)
 - [ ] NADI-004 — Demo runner + counters scaffold (S; after NADI-003)
 
