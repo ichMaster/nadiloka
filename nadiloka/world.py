@@ -13,6 +13,7 @@ import random
 from dataclasses import dataclass
 
 from nadiloka.grid import Grid
+from nadiloka.tejas import Patch, TejasField
 
 
 @dataclass(frozen=True)
@@ -44,6 +45,8 @@ class World:
         self.config = config
         self.rng = random.Random(config.seed)
         self.grid = Grid(config.width, config.height)
+        self.tejas = TejasField(self.grid, config.food_max)
+        self.patches: list[Patch] = []
         self.tick = 0
         # id -> Digitant; stays empty until v1.
         self.population: dict[int, object] = {}
@@ -65,7 +68,42 @@ class World:
         self.tick += 1
 
     def _update_tejas(self) -> None:
-        """Phase 1: light patches ignite, fade, and respawn. Filled in v0.2."""
+        """Phase 1: light patches age, fade, expire, and respawn (v0.2).
+
+        Every live patch ages one tick and fades linearly over its
+        lifetime; expired patches disappear and free their cells;
+        replacements ignite at fresh seeded positions to hold the
+        configured target count, so the light visibly moves. The field
+        is then rebuilt from the live patches, keeping it a pure
+        function of patch state.
+        """
+        for patch in self.patches:
+            patch.age += 1
+        self.patches = [p for p in self.patches if p.age < p.lifetime]
+        while len(self.patches) < self.config.patch_target:
+            self.patches.append(self._ignite())
+        self.tejas.clear()
+        for patch in self.patches:
+            faded = patch.intensity * (1 - patch.age / patch.lifetime)
+            self.tejas.illuminate(patch, faded)
+
+    def _ignite(self) -> Patch:
+        """A new patch at a seeded random cell, via the World's one RNG.
+
+        The initial batch (tick 0) ignites at staggered ages so total
+        field energy holds a steady level instead of the whole sky
+        pulsing in lockstep; every respawn after that starts at age 0.
+        """
+        x = self.rng.randrange(self.config.width)
+        y = self.rng.randrange(self.config.height)
+        age = self.rng.randrange(self.config.patch_lifetime) if self.tick == 0 else 0
+        return Patch(
+            center=(x, y),
+            radius=self.config.patch_radius,
+            intensity=self.config.patch_intensity,
+            lifetime=self.config.patch_lifetime,
+            age=age,
+        )
 
     def _rebuild_grid(self) -> None:
         """Phase 2: rebuild the spatial hash from live digitants. Filled in v1."""
