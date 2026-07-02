@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "nadiloka"
+version = "0.0.0"
+description = "An artificial-life ecosystem engine: digitants feed along a food chain, communicate through an event bus, and evolve."
+readme = "CLAUDE.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pysm",
+    "pyyaml",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["nadiloka"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
