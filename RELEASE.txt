@@ -1,6 +1,26 @@
 Nadiloka -- Release Notes
 =========================
 
+Version 0.2.0 (2026-07-02)
+---------------------------
+- Phase v0.2 (Space and the Tejas field): light patches ignite, live,
+  fade, and reappear across the grid. NADI-005 through NADI-008.
+- Grid: the bounded W x H spatial scaffold with (x, y) coordinates, no
+  edge wrapping, explicit out-of-bounds errors, and deterministic
+  row-major neighbourhood queries clipped at the edges (NADI-005).
+- Tejas field: per-cell light energy in 0..FOOD_MAX with clamped
+  illumination over patch discs, plus the take() read/decrement seam
+  v1.2's harvest will feed through; Patch{center, radius, intensity,
+  lifetime} model (NADI-006).
+- Patch lifecycle in the update-Tejas phase: age, linear fade, expiry,
+  and seeded respawn holding the target live-patch count; the initial
+  batch ignites staggered so total energy holds a steady level
+  (NADI-007).
+- Counters and the guard: the counter line now carries total field
+  energy and live patches; the energy-band test (150..1500 over 300
+  ticks, no cell above FOOD_MAX) pins the no-runaway-no-collapse DoD
+  (NADI-008).
+
 Version 0.1.0 (2026-07-02)
 ---------------------------
 - Phase v0.1 (Skeleton and the Meru tick): an empty world ticks
