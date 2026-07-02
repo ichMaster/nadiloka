@@ -87,7 +87,7 @@ Add the observation layer over the v0.2 field and prove Layer 1's readiness with
 **Implementation plan** (issue details in [roadmap/implementation/v0.3-issues.md](roadmap/implementation/v0.3-issues.md)):
 
 - [x] NADI-009 — ASCII renderer (S; after NADI-006)
-- [ ] NADI-010 — `demos/light.py` scenario (S; after NADI-009, NADI-007)
+- [x] NADI-010 — `demos/light.py` scenario (S; after NADI-009, NADI-007)
 - [ ] NADI-011 — Layer smoke run: the living light field (S; after NADI-010)
 
 ### v0.4 — Web visualization (React)
