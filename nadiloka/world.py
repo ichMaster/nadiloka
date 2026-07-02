@@ -35,3 +35,34 @@ class World:
         self.tick = 0
         # id -> Digitant; stays empty until v1.
         self.population: dict[int, object] = {}
+
+    def step(self) -> None:
+        """One turn of Meru: the five phases in fixed order, then advance the tick.
+
+        Invariant (ARCHITECTURE, One tick cycle): the phase order below
+        is deterministic and must never be reordered. Later versions
+        fill the hooks (Tejas in v0.2, grid/act/cleanup in v1, flush in
+        v3); the seams themselves stay fixed. Single and synchronous
+        for all.
+        """
+        self._update_tejas()
+        self._rebuild_grid()
+        self._act()
+        self._flush_nadi()
+        self._cleanup()
+        self.tick += 1
+
+    def _update_tejas(self) -> None:
+        """Phase 1: light patches ignite, fade, and respawn. Filled in v0.2."""
+
+    def _rebuild_grid(self) -> None:
+        """Phase 2: rebuild the spatial hash from live digitants. Filled in v1."""
+
+    def _act(self) -> None:
+        """Phase 3: digitants act over a population snapshot. Filled in v1."""
+
+    def _flush_nadi(self) -> None:
+        """Phase 4: deliver all Nadi messages emitted this tick. Filled in v3."""
+
+    def _cleanup(self) -> None:
+        """Phase 5: remove dead, eaten, and expired digitants. Filled in v1."""
