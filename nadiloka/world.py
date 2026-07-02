@@ -12,6 +12,8 @@ from __future__ import annotations
 import random
 from dataclasses import dataclass
 
+from nadiloka.grid import Grid
+
 
 @dataclass(frozen=True)
 class WorldConfig:
@@ -19,11 +21,14 @@ class WorldConfig:
 
     Nothing tunable lives as an engine constant: every number belongs
     here or in a species descriptor. The seed is always explicit --
-    from the config or the demo CLI (--seed), never implicit. Grid and
-    Tejas parameters join in v0.2.
+    from the config or the demo CLI (--seed), never implicit. The
+    defaults below are the reference parameters the tests and smoke
+    runs pin their bands against.
     """
 
     seed: int
+    width: int = 40
+    height: int = 25
 
 
 class World:
@@ -32,6 +37,7 @@ class World:
     def __init__(self, config: WorldConfig) -> None:
         self.config = config
         self.rng = random.Random(config.seed)
+        self.grid = Grid(config.width, config.height)
         self.tick = 0
         # id -> Digitant; stays empty until v1.
         self.population: dict[int, object] = {}
